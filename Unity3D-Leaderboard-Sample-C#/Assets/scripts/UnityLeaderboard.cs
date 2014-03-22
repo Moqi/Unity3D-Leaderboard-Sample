@@ -19,7 +19,6 @@ using com.shephertz.app42.paas.sdk.csharp.game;
 
 public class UnityLeaderboard : MonoBehaviour, App42CallBack
 {
-	//static ServiceAPI sp = null;
 	ScoreBoardService scoreBoardService = null; // Initialising ScoreBoard Service.
 	Constants cons = new Constants ();
 	public string success, columnName, rankersBox, saveBox, txt_user, errorLable, box, txt_score, playerScore, playerName, playerRank;
@@ -35,7 +34,6 @@ public class UnityLeaderboard : MonoBehaviour, App42CallBack
 		#if UNITY_EDITOR
 		ServicePointManager.ServerCertificateValidationCallback = Validator;
 		#endif
-		//sp = new ServiceAPI (cons.apiKey, cons.secretKey);
 		App42API.Initialize(cons.apiKey, cons.secretKey);
 	}
 	
@@ -48,11 +46,11 @@ public class UnityLeaderboard : MonoBehaviour, App42CallBack
 		GUI.Label (new Rect (470, 70, 200, 200), playerRank);
 		GUI.Label (new Rect (540, 70, 200, 200), playerName);
 		GUI.Label (new Rect (620, 70, 200, 200), playerScore);
-
+		
 		if (GUI.Button (new Rect (470, 250, 200, 50), "QUIT")) {
 			Application.Quit();
 		}
-
+		
 		// Label For EXCEPTION Message .
 		GUI.Label (new Rect (250, 250, 700, 400), errorLable);
 		
@@ -134,6 +132,13 @@ public class UnityLeaderboard : MonoBehaviour, App42CallBack
 		
 	}
 	
+	//=======================================================================================
+	//---------------------------ON-SUCCESS OF APP42CALLBACK.--------------------------------------
+	//=======================================================================================
+	/// <summary>
+	/// Raises the success event.
+	/// </summary>
+	/// <param name="response">Response.</param>
 	public void OnSuccess (object response)
 	{
 		var nxtLine = System.Environment.NewLine; //Use this whenever i need to print something On Next Line.
@@ -172,6 +177,13 @@ public class UnityLeaderboard : MonoBehaviour, App42CallBack
 		}
 	}
 	
+	//=======================================================================================
+	//---------------------------ON-SUCCESS OF APP42CALLBACK.--------------------------------------
+	//=======================================================================================
+	/// <summary>
+	/// Raises the exception event.
+	/// </summary>
+	/// <param name="e">E.</param>
 	public void OnException (Exception e)
 	{
 		var nxtLine = System.Environment.NewLine; //Use this whenever i need to print something On Next Line.
@@ -180,7 +192,7 @@ public class UnityLeaderboard : MonoBehaviour, App42CallBack
 		int appErrorCode = exception.GetAppErrorCode ();
 		if (appErrorCode == 3002) {
 			box = "Exception Occurred :" + nxtLine +
-				"Game With The Name (" + cons.gameName + ")" + nxtLine + 
+				"Game With The Name "+ nxtLine + "(" + cons.gameName + ")" + nxtLine + 
 					" Does Not Exist.";
 			// handle here , If Game Name Does Not Exist.
 		} else if (appErrorCode == 3013) {
