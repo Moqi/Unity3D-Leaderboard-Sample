@@ -38,9 +38,9 @@ __Initialize App42 :__
 In order to use the various functions available in a specific API. 
 A developer has to create an instance of ServiceAPI by passing the apiKey and secretKey which will be created after the app creation from AppHQ dashboard.
 
-Edit AppConstant.cs script and put your API_KEY and SECRET_KEY (which were received in step#2 & #3) as shown below.
+Edit Constants.cs script and put your API_KEY and SECRET_KEY (which were received in step#2 & #3) as shown below.
 ```
-public class AppConstant : MonoBehaviour 
+public class Constants : MonoBehaviour 
 {
   public static string API_KEY = "YOUR_API_KEY";
   public static string SECRET_KEY = "YOUR_SECRET_KEY";
